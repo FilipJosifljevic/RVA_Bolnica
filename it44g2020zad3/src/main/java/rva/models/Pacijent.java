@@ -2,6 +2,9 @@ package rva.models;
 
 import java.sql.Date;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -34,10 +37,12 @@ public class Pacijent {
 	private Date datumRodjenja;
 	
 	@ManyToOne
+	@OnDelete(action=OnDeleteAction.CASCADE)
 	@JoinColumn(name="odeljenje")
 	private Odeljenje odeljenje;
 	
 	@ManyToOne
+	@OnDelete(action=OnDeleteAction.CASCADE)
 	@JoinColumn(name="dijagnoza")
 	private Dijagnoza dijagnoza;
 

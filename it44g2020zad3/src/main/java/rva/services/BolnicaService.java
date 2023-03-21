@@ -33,4 +33,16 @@ public class BolnicaService {
 		String pocetakNazivaMalimSlovom = pocetakNaziva.toLowerCase();
 		return bolnicaRepository.getByPocetak(pocetakNazivaMalimSlovom);
 	}
+	
+	public boolean existsById(int id) {
+		return getBolnicaById(id).isPresent();
+	}
+	
+	public Bolnica addBolnica(Bolnica bolnica) {
+		return bolnicaRepository.save(bolnica);
+	}
+	
+	public void deleteBolnica(int id) {
+		bolnicaRepository.deleteById(id);
+	}
 }

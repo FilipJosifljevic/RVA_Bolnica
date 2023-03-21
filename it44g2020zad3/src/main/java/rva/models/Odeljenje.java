@@ -3,6 +3,9 @@ package rva.models;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -30,6 +33,7 @@ public class Odeljenje implements Serializable {
 	private String lokacija;
 	
 	@ManyToOne
+	@OnDelete(action=OnDeleteAction.CASCADE)
 	@JoinColumn(name="klinika")
 	private Bolnica klinika;
 	
