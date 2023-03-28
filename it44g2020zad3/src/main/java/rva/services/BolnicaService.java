@@ -26,8 +26,8 @@ public class BolnicaService {
 		return bolnicaRepository.findById(id);
 	}
 
-	public List<Bolnica> getBolnicaByNaziv(String nazivArtikla) {
-	return bolnicaRepository.findByNazivContainingIgnoreCase(nazivArtikla);
+	public List<Bolnica> getBolnicaByNaziv(String nazivBolnice) {
+	return bolnicaRepository.findByNazivContainingIgnoreCase(nazivBolnice);
 	}
 	public List<Bolnica> getBolnicaByPocetnoSlovo(String pocetakNaziva){
 		String pocetakNazivaMalimSlovom = pocetakNaziva.toLowerCase();
