@@ -14,4 +14,7 @@ public interface BolnicaRepository extends JpaRepository<Bolnica, Integer>{
 	
 	@Query(value="SELECT * FROM bolnica WHERE LOWER(naziv) LIKE :pocetak%", nativeQuery = true)
 	List<Bolnica> getByPocetak(@Param("pocetak") String pocetakNaziva);
+	
+	@Query(value="SELECT * FROM bolnica WHERE budzet <= ?1 ORDER BY budzet DESC", nativeQuery = true)
+	List<Bolnica> getByBudzet(@Param("budzet") int budzet);
 }

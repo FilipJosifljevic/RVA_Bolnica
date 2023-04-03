@@ -44,8 +44,8 @@ public class BolnicaController {
 	}
 	
 	@GetMapping("bolnicaNaziv/{naziv}")
-	public ResponseEntity<?> getBolnicaByNaziv(@PathVariable("naziv") String nazivArtikla){
-		List<Bolnica> bolnice = bolnicaService.getBolnicaByNaziv(nazivArtikla);
+	public ResponseEntity<?> getBolnicaByNaziv(@PathVariable("naziv") String nazivBolnice){
+		List<Bolnica> bolnice = bolnicaService.getBolnicaByNaziv(nazivBolnice);
 		if(bolnice.isEmpty())
 			return new ResponseEntity<>(
 				"Bolnice with that naziv- not found",
@@ -61,6 +61,16 @@ public class BolnicaController {
 				HttpStatus.NOT_FOUND);
 		return ResponseEntity.status(HttpStatus.OK).body(bolnice);
 	}
+	
+	@GetMapping("bolnicabudzet/{budzet}")
+		public ResponseEntity<?> getBolnicaByBudzet(@PathVariable("budzet") int budzet){
+			List<Bolnica> bolnice = bolnicaService.getBolnicaByBudzet(budzet);
+			if(bolnice.isEmpty())
+				return new ResponseEntity<>(
+						"Bolnice with budzet lower than that - not found",
+						HttpStatus.NOT_FOUND);
+			return ResponseEntity.status(HttpStatus.OK).body(bolnice);
+		}
 	
 	@PostMapping("bolnica")
 	public ResponseEntity<?> addBolnica(@RequestBody Bolnica bolnica){

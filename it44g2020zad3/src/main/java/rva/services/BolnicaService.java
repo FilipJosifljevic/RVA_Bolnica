@@ -27,11 +27,16 @@ public class BolnicaService {
 	}
 
 	public List<Bolnica> getBolnicaByNaziv(String nazivBolnice) {
-	return bolnicaRepository.findByNazivContainingIgnoreCase(nazivBolnice);
+		return bolnicaRepository.findByNazivContainingIgnoreCase(nazivBolnice);
 	}
+	
 	public List<Bolnica> getBolnicaByPocetnoSlovo(String pocetakNaziva){
 		String pocetakNazivaMalimSlovom = pocetakNaziva.toLowerCase();
 		return bolnicaRepository.getByPocetak(pocetakNazivaMalimSlovom);
+	}
+	
+	public List<Bolnica> getBolnicaByBudzet(int budzet){
+		return bolnicaRepository.getByBudzet(budzet);
 	}
 	
 	public boolean existsById(int id) {

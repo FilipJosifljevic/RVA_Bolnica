@@ -11,6 +11,7 @@ import rva.models.Dijagnoza;
 public interface DijagnozaRepository extends JpaRepository<Dijagnoza, Integer>{
 
 	List<Dijagnoza> findByNazivContainingIgnoreCase(String naziv);
+	
 	@Query(value="SELECT * FROM dijagnoza WHERE LOWER(naziv) LIKE :pocetak%", nativeQuery = true)
 	List<Dijagnoza> getByPocetak(@Param("pocetak") String pocetakNaziva);
 }

@@ -26,4 +26,21 @@ public class DijagnozaService {
 	public List<Dijagnoza> getDijagnozaByNaziv(String nazivDijagnoze){
 		return dijagnozaRepository.findByNazivContainingIgnoreCase(nazivDijagnoze);
 	}
+	
+	public List<Dijagnoza> getDijagnozaByPocetnoSlovo(String pocetakNaziva){
+		String pocetakNazivaMalimSlovom = pocetakNaziva.toLowerCase();
+		return dijagnozaRepository.getByPocetak(pocetakNazivaMalimSlovom);
+	}
+	
+	public boolean existsById(int id) {
+		return getDijagnozaById(id).isPresent();
+	}
+	
+	public Dijagnoza addDijagnoza(Dijagnoza dijagnoza) {
+		return dijagnozaRepository.save(dijagnoza);
+	}
+	
+	public void deleteDijagnoza(int id) {
+		dijagnozaRepository.deleteById(id);
+	}
 }
