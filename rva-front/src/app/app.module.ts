@@ -16,6 +16,12 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BolnicaDialogComponent } from './components/dialogs/bolnica-dialog/bolnica-dialog.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,7 +29,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     BolnicaComponent,
     OdeljenjeComponent,
     DijagnozaComponent,
-    PacijentComponent
+    PacijentComponent,
+    BolnicaDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +43,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatExpansionModule,
     HttpClientModule,
     MatTableModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
