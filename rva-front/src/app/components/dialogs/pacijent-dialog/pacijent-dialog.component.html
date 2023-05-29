@@ -7,20 +7,14 @@
 
         <div class="form">
             <mat-form-field class="example-full-width">
-                <input type="tel" matInput placeholder="ime" [(ngModel)]="data.ime" name="ime"
+                <input type="tel" matInput placeholder="Ime" [(ngModel)]="data.ime" name="ime"
                     [disabled]="flag == 3">
             </mat-form-field>
         </div>
 
         <div class="form">
             <mat-form-field class="example-full-width">
-                <input type="tel" matInput placeholder="prezime" [(ngModel)]="data.prezime" name="prezime"
-                    [disabled]="flag == 3">
-            </mat-form-field>
-        </div>
-        <div class="form">
-            <mat-form-field class="example-full-width">
-                <input type="tel" matInput placeholder="prezime" [(ngModel)]="data.prezime" name="prezime"
+                <input type="tel" matInput placeholder="Prezime" [(ngModel)]="data.prezime" name="prezime"
                     [disabled]="flag == 3">
             </mat-form-field>
         </div>
@@ -31,7 +25,7 @@
         </div>
         <div class="form">
             <mat-form-field>
-                <input matInput [matDatepicker]="datumRodjenja" placeholder="datum rodjenja" [(ngModel)]="data.datumRodjenja"
+                <input matInput [matDatepicker]="datumRodjenja" placeholder="Datum rodjenja" [(ngModel)]="data.datumRodjenja"
                     name="datumRodjenja" [disabled]="flag == 3">
                 <mat-datepicker-toggle matSuffix [for]="datumRodjenja"></mat-datepicker-toggle>
                 <mat-datepicker #datumRodjenja></mat-datepicker>
@@ -39,7 +33,7 @@
         </div>
         <div class="form">
             <mat-form-field>
-                <mat-select [(ngModel)]="data.odeljenje" placeholder="odeljenje" name="odeljenje"
+                <mat-select [(ngModel)]="data.odeljenje" placeholder="Odeljenje" name="odeljenje"
                     [compareWith]="compareTo" [disabled]="flag == 3">
                     <mat-option *ngFor="let odeljenje of odeljenja" [value]="odeljenje">
                         {{ odeljenje.naziv }}
@@ -49,7 +43,7 @@
         </div>
         <div class="form">
             <mat-form-field>
-                <mat-select [(ngModel)]="data.dijagnoza" placeholder="dijagnoza" name="dijagnoza"
+                <mat-select [(ngModel)]="data.dijagnoza" placeholder="Dijagnoza" name="dijagnoza"
                     [compareWith]="compareTo" [disabled]="flag == 3">
                     <mat-option *ngFor="let dijagnoza of dijagnoze" [value]="dijagnoza">
                         {{ dijagnoza.naziv }}

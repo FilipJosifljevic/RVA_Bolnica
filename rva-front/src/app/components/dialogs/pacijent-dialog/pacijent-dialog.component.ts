@@ -40,7 +40,7 @@ export class PacijentDialogComponent {
       }),
     this.dijagnozaSubscription = this.dijagnozaService.getAllDijagnoza()
     .subscribe(dijagnoze => {
-        this.dijagnoze= this.dijagnoze;
+        this.dijagnoze = dijagnoze;
     }),
       (error: Error) => {
         console.log(error.name + ' ' + error.message);
