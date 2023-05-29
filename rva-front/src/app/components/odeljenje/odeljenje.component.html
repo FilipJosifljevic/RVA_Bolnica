@@ -3,23 +3,26 @@
 </mat-toolbar>
 
 <div class="container mat-elevation-z8">
-    <mat-table #table [dataSource]="dataSource" class="mat-cell">
+    <mat-form-field>
+        <input matInput placeholder="Pretraga odeljenja..." (keyup)="applyFilter($event)">
+    </mat-form-field>
+    <mat-table #table [dataSource]="dataSource" class="mat-cell" matSort>
         <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
             <mat-cell *matCellDef="let row">{{ row.id }}</mat-cell>
         </ng-container>
         <ng-container matColumnDef="naziv">
-            <mat-header-cell *matHeaderCellDef>Naziv</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Naziv</mat-header-cell>
             <mat-cell *matCellDef="let row"> {{ row.naziv }}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="lokacija">
-            <mat-header-cell *matHeaderCellDef>Lokacija</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Lokacija</mat-header-cell>
             <mat-cell *matCellDef="let row"> {{ row.lokacija }}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="klinika">
-            <mat-header-cell *matHeaderCellDef>Bolnica</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Bolnica</mat-header-cell>
             <mat-cell *matCellDef="let row"> {{ row.klinika.naziv }}</mat-cell>
         </ng-container>
         <!-- actions -->
@@ -44,9 +47,17 @@
                 </button>
             </mat-cell>
         </ng-container>
-
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row style="cursor: pointer" *matRowDef="let row; columns: displayedColumns;">
+        <mat-row style="cursor: pointer" *matRowDef="let row; columns: displayedColumns;" (click)="selectRow(row)">
         </mat-row>
-    </mat-table>   
+
+    </mat-table>
+    <mat-paginator [length]="100" [pageSize]="5" [pageSizeOptions]="[5,10,25,100]">
+    </mat-paginator>
+
+    <div class="container mat-elevation-z8">
+        <app-pacijent *ngIf="selektovanoOdeljenje" [selektovanoOdeljenje]="selektovanoOdeljenje">
+        </app-pacijent>
+    </div>
 </div>
+

@@ -29,6 +29,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { OdeljenjeDialogComponent } from './components/dialogs/odeljenje-dialog/odeljenje-dialog.component';
+import { DijagnozaDialogComponent } from './components/dialogs/dijagnoza-dialog/dijagnoza-dialog.component';
+import { PacijentDialogComponent } from './components/dialogs/pacijent-dialog/pacijent-dialog.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,9 @@ import { OdeljenjeDialogComponent } from './components/dialogs/odeljenje-dialog/
     DijagnozaComponent,
     PacijentComponent,
     BolnicaDialogComponent,
-    OdeljenjeDialogComponent
+    OdeljenjeDialogComponent,
+    DijagnozaDialogComponent,
+    PacijentDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +69,7 @@ import { OdeljenjeDialogComponent } from './components/dialogs/odeljenje-dialog/
     MatSortModule,
     MatPaginatorModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

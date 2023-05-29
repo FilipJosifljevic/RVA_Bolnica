@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
+import { Bolnica } from 'src/app/models/bolnica';
 import { Odeljenje } from 'src/app/models/odeljenje';
 import { OdeljenjeService } from 'src/app/services/odeljenje.service';
 import { OdeljenjeDialogComponent } from '../dialogs/odeljenje-dialog/odeljenje-dialog.component';
@@ -15,17 +19,46 @@ export class OdeljenjeComponent {
   subscription!: Subscription;
   displayedColumns = ['id', 'naziv', 'lokacija', 'klinika','actions'];
   dataSource!: MatTableDataSource<Odeljenje>;
+  selektovanoOdeljenje!: Odeljenje;
+  @ViewChild(MatSort, { static: false }) sort!: MatSort;
+  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
 
-  constructor(private odeljenjeService: OdeljenjeService, private dialog: MatDialog) { }
+  constructor(private odeljenjeService: OdeljenjeService, private dialog: MatDialog, public snackBar: MatSnackBar) { }
 
   ngOnInit(): void { this.loadData(); }
-  ngOnChanges(): void { this.loadData(); }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+  ngOnChanges(): void {
+    this.loadData();
+  }
 
-  public loadData() {
+  loadData() {
     this.subscription = this.odeljenjeService.getAllOdeljenje().subscribe(
       data => {
-        this.dataSource = new MatTableDataSource(data)
-        console.log(data)
+        this.dataSource = new MatTableDataSource(data);
+        //sortiramo po ugnjezdenom obelezju
+         this.dataSource.sortingDataAccessor = (row: Odeljenje, columnName: string): string => {
+ 
+           console.log(row, columnName);
+           if (columnName == "klinika") return row.klinika.naziv.toLocaleLowerCase();
+           var columnValue = row[columnName as keyof Odeljenje] as unknown as string;
+           return columnValue;
+ 
+         }
+ 
+         this.dataSource.sort = this.sort;
+         //filtriranje po ugnjezdenom obelezju
+         this.dataSource.filterPredicate = (data, filter: string) => {
+           const accumulator = (currentTerm: any, key: string) => {
+             return key === 'klinika' ? currentTerm + data.klinika.naziv : currentTerm + data[key as keyof Odeljenje];
+           };
+           const dataStr = Object.keys(data).reduce(accumulator, '').toLowerCase();
+           const transformedFilter = filter.trim().toLowerCase();
+           return dataStr.indexOf(transformedFilter) !== -1;
+         };
+ 
+         this.dataSource.paginator = this.paginator;
       },
       (error: Error) => {
         console.log(error.name + ' ' + error.message);
@@ -48,6 +81,10 @@ export class OdeljenjeComponent {
     })
   }
 
+  selectRow(row: any) {
+    this.selektovanoOdeljenje = row;
+  }
+  
   applyFilter(filterValue: any) {
     filterValue = filterValue.target.value
     filterValue = filterValue.trim();
